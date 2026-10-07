@@ -1,0 +1,10 @@
+FROM php:8.4-cli
+
+# Instala o driver do PostgreSQL no PHP
+RUN apt-get update && apt-get install -y libpq-dev zip unzip \
+    && docker-php-ext-install pdo pdo_pgsql
+
+WORKDIR /var/www/html
+
+# Inicia o Laravel na porta 8000
+CMD php artisan serve --host=0.0.0.0 --port=8000
